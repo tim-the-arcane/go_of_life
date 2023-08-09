@@ -1,4 +1,4 @@
-module github.com/tim-the-arcane/go-of-life
+module github.com/tim-the-arcane/go_of_life
 
 go 1.21.0
 

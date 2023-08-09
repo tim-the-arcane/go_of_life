@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/gen2brain/raylib-go/raylib"
+	rl "github.com/gen2brain/raylib-go/raylib"
+	utils "github.com/tim-the-arcane/go_of_life/pkg/components/utils"
 	"math"
 	"math/rand"
 )
@@ -24,6 +25,7 @@ var (
 
 func main() {
 	initialize()
+	defer rl.CloseWindow()
 
 	for !rl.WindowShouldClose() {
 		if currentFrame > 6 {
@@ -32,15 +34,16 @@ func main() {
 		}
 		draw()
 	}
-
-	rl.CloseWindow()
 }
 
 func initialize() {
-	fmt.Println("Initializing...")
-	fmt.Println("Rows: ", rows)
-	fmt.Println("Columns: ", columns)
+	initializeCells()
 
+	rl.InitWindow(screenWidth, screenHeight, "Go of Life")
+	rl.SetTargetFPS(fps)
+}
+
+func initializeCells() {
 	for i := range cells {
 		cells[i] = make([]int, columns)
 
@@ -52,9 +55,6 @@ func initialize() {
 			}
 		}
 	}
-
-	rl.InitWindow(screenWidth, screenHeight, "Go of Life")
-	rl.SetTargetFPS(fps)
 }
 
 func update() {
@@ -83,7 +83,7 @@ func draw() {
 	rl.ClearBackground(rl.RayWhite)
 
 	drawCells()
-	drawFps()
+	utils.DrawDevOverlay()
 
 	rl.EndDrawing()
 	currentFrame++
@@ -189,10 +189,4 @@ func drawCells() {
 			rl.DrawRectangle(int32(j)*cellWidth, int32(i)*cellWidth, cellWidth, cellWidth, color)
 		}
 	}
-}
-
-func drawFps() {
-	fps, frameTime := rl.GetFPS(), rl.GetFrameTime()
-
-	rl.DrawText(fmt.Sprintf("FPS: %d\nFrametime: %f", fps, frameTime), 15, 12, 20, rl.Red)
 }
