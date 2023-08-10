@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: GoOfLife-${{github.ref_name}}
-          path: ./build/Release/**/*
+          path: ./build/*
           retention-days: 1
 
   create-release:
@@ -48,6 +48,5 @@ jobs:
         with:
           name: GoOfLife-${{github.ref_name}}
           path: ./download
-      - name: Display Contents
-        run: |
-          ls -R ./download
+      - name: Create Release
+        run: gh release create ${{github.ref_name}} ./download/*
