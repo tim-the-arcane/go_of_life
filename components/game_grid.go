@@ -13,12 +13,21 @@ type Game interface {
 	Draw()
 }
 
+type EditMode int64
+
+const (
+	Toggle EditMode = iota
+	Pen
+	Eraser
+)
+
 type gameImpl struct {
 	rows      int
 	columns   int
 	grid      [][]bool
 	cellWidth int32
 	running   bool
+	editMode  EditMode
 }
 
 func NewGame(rows int, columns int, cellWidth int32) Game {
@@ -63,6 +72,7 @@ func (g *gameImpl) Draw() {
 	}
 
 	rl.DrawText(playstate, int32(screenWidth)-30-int32(textsize), int32(fontsize), int32(fontsize), rl.RayWhite)
+	rl.DrawText(playstate, int32(screenWidth)-30-int32(textsize), int32(fontsize), int32(fontsize), rl.RayWhite)
 }
 
 func (g *gameImpl) initialize() {
@@ -71,19 +81,28 @@ func (g *gameImpl) initialize() {
 }
 
 func (g *gameImpl) processInput() {
-	if rl.IsMouseButtonPressed(rl.MouseLeftButton) {
-		fmt.Println("CLICK", rl.MouseLeftButton)
-		if !g.running {
-			mousePos := rl.GetMousePosition()
 
-			if inWindow, _ := helpers.IsMouseInWindow(); inWindow {
-				col := int(math.Floor(float64(mousePos.X) / float64(g.cellWidth)))
-				row := int(math.Floor(float64(mousePos.Y) / float64(g.cellWidth)))
+	if !g.running {
+		mousePos := rl.GetMousePosition()
+
+		if inWindow, _ := helpers.IsMouseInWindow(); inWindow {
+			col := int(math.Floor(float64(mousePos.X) / float64(g.cellWidth)))
+			row := int(math.Floor(float64(mousePos.Y) / float64(g.cellWidth)))
+
+			if rl.IsMouseButtonPressed(rl.MouseLeftButton) && g.editMode == Toggle {
+				fmt.Println("CLICK", rl.MouseLeftButton)
 				fmt.Printf("Clicked on row %d and col %d \n", row+1, col+1)
 				g.toggleCell(row, col)
 			}
-		} else {
-			g.pause()
+
+			if rl.IsMouseButtonDown(rl.MouseLeftButton) && g.editMode != Toggle {
+				switch g.editMode {
+				case Pen:
+					g.setCell(row, col, true)
+				case Eraser:
+					g.setCell(row, col, false)
+				}
+			}
 		}
 	}
 
@@ -101,6 +120,12 @@ func (g *gameImpl) processInput() {
 		g.randomizeCells()
 	case rl.KeyN:
 		g.nextGeneration()
+	case rl.KeyP:
+		g.editMode = Pen
+	case rl.KeyE:
+		g.editMode = Eraser
+	case rl.KeyT:
+		g.editMode = Toggle
 	}
 }
 
