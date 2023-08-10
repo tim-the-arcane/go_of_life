@@ -20,9 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Install gcc macOS
-        if: matrix.os == 'macos-latest'
-        run: brew install gcc
       - name: Install X11 on Ubuntu
         if: matrix.os == 'ubuntu-latest'
         run: sudo apt-get install libgl1-mesa-dev libxi-dev libxcursor-dev libxrandr-dev libxinerama-dev
