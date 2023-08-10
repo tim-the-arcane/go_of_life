@@ -20,10 +20,13 @@ jobs:
           go-version: '1.21.0'
       - name: Build Release
         run: |
-          go build ./cmd/main/main.go
-      - name: List dir
-        run: |
-          ls -la
-      - name: Test run
-        run: |
-          ./main.exe
+          make release_win64
+      - name: Upload Release to github
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/Release/Win64/GoOfLife.exe
+          asset_name: Windows x64 Release
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "This is my release text"
