@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-    name: Build ${{ runner.os }} ${{ runner.os }}
+    name: Build ${{ matrix.os }} AMD64
     runs-on: ${{ matrix.os }}
     defaults:
       run:
