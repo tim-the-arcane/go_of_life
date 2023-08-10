@@ -12,10 +12,12 @@ jobs:
       run:
         shell: bash
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Setup Go
         uses: actions/setup-go@v4
         with:
           go-version: '1.21.0'
-      - name: Test go
+      - name: Build Release
         run: |
-          go -v
+          go build ./cmd/main/main.go
