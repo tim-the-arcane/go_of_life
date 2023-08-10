@@ -28,7 +28,7 @@ jobs:
         run: |
           make $MAKE_VERSION release_win64
         env:
-          MAKE_VERSION: ${{ matrix.os }}
+          MAKE_VERSION: github_actions_${{ matrix.os }}
       - name: Upload Release
         uses: actions/upload-artifact@v2
         with:
