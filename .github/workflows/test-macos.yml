@@ -1,0 +1,16 @@
+name: Test macos
+
+on:
+  push:
+    branches:
+      - test-macos
+
+jobs:
+  test:
+    runs-on: "macos-latest"
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Test for gcc version
+        run: gcc -v
