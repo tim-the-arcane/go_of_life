@@ -40,6 +40,7 @@ jobs:
         env:
           MAKE_VERSION: github_actions_${{ matrix.os }}
       - name: Upload Release
+        if: startsWith(github.ref, 'refs/tags/v')
         uses: actions/upload-artifact@v3
         with:
           name: GoOfLife-${{github.ref_name}}
