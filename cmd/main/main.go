@@ -6,14 +6,6 @@ import (
 	"time"
 )
 
-// Config
-const (
-	rows        int32 = 80
-	columns     int32 = 80
-	screenWidth int32 = 800
-	fps         int32 = 60
-)
-
 var (
 	showDevPanel   bool = false
 	game           components.Game
@@ -39,17 +31,18 @@ func main() {
 }
 
 func initialize() {
-	// Calculate dimensions
-	cellWidth := int32(screenWidth / columns)
-	screenWidth := columns * cellWidth
-	screenHeight := rows * cellWidth
-
 	// Initialize Raylib window
-	rl.InitWindow(screenWidth, screenHeight, "Go of Life")
-	rl.SetTargetFPS(fps)
+	rl.InitWindow(800, 800, "Go of Life")
+	rl.SetTargetFPS(60)
+
+	screenWidth := rl.GetMonitorWidth(rl.GetCurrentMonitor())
+	screenHeight := rl.GetMonitorHeight(rl.GetCurrentMonitor())
+
+	rl.SetWindowSize(screenWidth, screenHeight)
+	rl.ToggleFullscreen()
 
 	// Initialize game
-	game = components.NewGame(int(rows), int(columns), cellWidth)
+	game = components.NewGame(int(screenHeight), int(screenWidth), 1)
 }
 
 func update() {
@@ -62,7 +55,7 @@ func update() {
 
 func draw() {
 	rl.BeginDrawing()
-	rl.ClearBackground(rl.RayWhite)
+	rl.ClearBackground(rl.Black)
 
 	game.Draw()
 
