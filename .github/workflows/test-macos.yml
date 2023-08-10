@@ -6,11 +6,11 @@ on:
       - test-macos
 
 jobs:
-  test:
+  test-amd64:
     runs-on: "macos-latest"
     defaults:
       run:
         shell: bash
     steps:
       - name: Test for gcc version
-        run: gcc -v
+        run: go build ./cmd/main/main.go
