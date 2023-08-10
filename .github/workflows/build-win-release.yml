@@ -34,6 +34,7 @@ jobs:
         with:
           name: GoOfLife-${{github.ref_name}}
           path: ./build/Release/**/*
+          retention-days: 5
 
   create-release:
     needs: [build]
