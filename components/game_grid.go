@@ -46,8 +46,6 @@ func (g *gameImpl) Draw() {
 		for j := range g.grid[i] {
 			if g.grid[i][j] {
 				rl.DrawRectangle(int32(i)*g.cellWidth, int32(j)*g.cellWidth, g.cellWidth, g.cellWidth, rl.Green)
-			} else {
-				rl.DrawRectangle(int32(i)*g.cellWidth, int32(j)*g.cellWidth, g.cellWidth, g.cellWidth, rl.Black)
 			}
 		}
 	}

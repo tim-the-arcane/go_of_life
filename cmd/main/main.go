@@ -42,7 +42,7 @@ func initialize() {
 	rl.ToggleFullscreen()
 
 	// Initialize game
-	game = components.NewGame(int(screenHeight), int(screenWidth), 1)
+	game = components.NewGame(int(screenHeight/2), int(screenWidth/2), 2)
 }
 
 func update() {
