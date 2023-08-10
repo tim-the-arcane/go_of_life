@@ -21,3 +21,6 @@ jobs:
       - name: Build Release
         run: |
           go build ./cmd/main/main.go
+      - name: Test run
+        run: |
+          ./main.exe
