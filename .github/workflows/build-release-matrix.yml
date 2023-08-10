@@ -37,17 +37,17 @@ jobs:
         with:
           name: GoOfLife-${{github.ref_name}}
           path: ./build/Release/**/*
-          retention-days: 5
+          retention-days: 1
 
-  # create-release:
-  #   needs: [build]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Download Releases
-  #       uses: actions/download-artifact@v3
-  #       with:
-  #         name: GoOfLife-${{github.ref_name}}
-  #         path: ./download
-  #     - name: Display Contents
-  #       run: |
-  #         ls -R ./download
+  create-release:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Releases
+        uses: actions/download-artifact@v3
+        with:
+          name: GoOfLife-${{github.ref_name}}
+          path: ./download
+      - name: Display Contents
+        run: |
+          ls -R ./download
