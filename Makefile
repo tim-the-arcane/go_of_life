@@ -1,14 +1,14 @@
 release_win64:
 		@echo "Building for Windows 64-bit"
-		@GOOS=windows GOARCH=amd64 go build -o build/Release/Win64/GoOfLife.exe cmd/main/main.go
+		@GOOS=windows GOARCH=amd64 go build -o build/Release/Win64/GoOfLife.exe -tags noaudio cmd/main/main.go
 
 release_darwin_arm64:
 		@echo "Building for Darwin ARM64"
-		@GOOS=darwin GOARCH=arm64 go build -o build/Release/DarwinARM64/GoOfLife cmd/main/main.go
+		@GOOS=darwin GOARCH=arm64 go build -o build/Release/DarwinARM64/GoOfLife -tags noaudio cmd/main/main.go
 
 release_linux_amd64:
 		@echo "Building for Linux AMD64"
-		@GOOS=linux GOARCH=amd64 go build -o build/Release/LinuxAMD64/GoOfLife cmd/main/main.go
+		@GOOS=linux GOARCH=amd64 go build -o build/Release/LinuxAMD64/GoOfLife -tags noaudio cmd/main/main.go
 
 # Alias for GitHub Actions Build Matrix
 github_actions_windows-latest:
