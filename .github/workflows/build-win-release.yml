@@ -22,4 +22,7 @@ jobs:
         run: |
           make release_win64
       - name: Create Release
-        run: gh release create v0.0.1 -t "v0.0.1" ./build/release_win64/gh-action-test.exe
+        run: gh release create $RELEASE_NAME -t "$RELEASE_NAME" ./build/Release/Win64/GoOfLife.exe
+        env:
+          RELEASE_NAME: ${{github.ref_name}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
