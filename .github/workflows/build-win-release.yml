@@ -3,7 +3,7 @@ name: Build Windows x64 Release
 on:
   push:
     branches:
-      - test-gcc-action
+      - release
 
 jobs:
   build:
@@ -21,12 +21,5 @@ jobs:
       - name: Build Release
         run: |
           make release_win64
-      - name: Upload Release to github
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/Release/Win64/GoOfLife.exe
-          asset_name: Windows x64 Release
-          tag: ${{ github.ref }}
-          overwrite: true
-          body: "This is my release text"
+      - name: Create Release
+        run: gh release create v0.0.1 -t "v0.0.1" ./build/release_win64/gh-action-test.exe
