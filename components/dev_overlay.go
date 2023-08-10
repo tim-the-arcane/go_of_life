@@ -1,4 +1,4 @@
-package go_of_life
+package components
 
 import (
 	"fmt"
