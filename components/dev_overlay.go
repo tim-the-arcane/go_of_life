@@ -7,9 +7,10 @@ import (
 )
 
 func DrawDevOverlay() {
-	fps, frameTime, mousePos := rl.GetFPS(), rl.GetFrameTime(), rl.GetMousePosition()
-	text := fmt.Sprintf("FPS: %d\nFrametime: %f\nMouse: %.2f %.2f", fps, frameTime, mousePos.X, mousePos.Y)
+	fps, mousePos := rl.GetFPS(), rl.GetMousePosition()
+	text := fmt.Sprintf("FPS: %d\nMouse: %.2f %.2f", fps, mousePos.X, mousePos.Y)
+	textDimensions := rl.MeasureTextEx(rl.GetFontDefault(), text, 20, 10)
 
-	rl.DrawRectangle(0, 0, 300, 200, color.RGBA{255, 255, 255, 120})
+	rl.DrawRectangle(0, 0, int32(textDimensions.X+30), int32(textDimensions.Y+30), color.RGBA{255, 255, 255, 255})
 	rl.DrawText(text, 15, 12, 20, rl.Red)
 }
