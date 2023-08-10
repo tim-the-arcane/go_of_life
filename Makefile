@@ -1,7 +1,7 @@
 release_linux_amd64:
 		@echo "Building for Linux amd64"
 		@GOOS=linux GOARCH=amd64 \
-		@make build_release
+		make build_release
 
 release_darwin_arm64:
 		@echo "Building for Darwin arm64"
