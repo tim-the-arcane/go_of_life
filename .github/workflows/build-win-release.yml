@@ -36,7 +36,7 @@ jobs:
         env:
           MAKE_VERSION: github_actions_${{ matrix.os }}
       - name: Upload Release
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: GoOfLife-${{github.ref_name}}
           path: ./build/Release/**/*
@@ -47,7 +47,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Download Releases
-  #       uses: actions/download-artifact@v2
+  #       uses: actions/download-artifact@v3
   #       with:
   #         name: GoOfLife-${{github.ref_name}}
   #         path: ./download
