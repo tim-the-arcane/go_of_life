@@ -15,7 +15,7 @@ github_actions_windows-latest:
 		@make release_win64
 
 github_actions_macos-latest:
-		@make release_darwin_arm64
+		@make release_darwin_amd64
 
 github_actions_ubuntu-latest:
 		@make release_linux_amd64
