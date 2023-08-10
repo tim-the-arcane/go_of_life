@@ -1,12 +1,12 @@
-name: Build Release
+name: Build Release Matrix
 
 permissions:
   contents: write
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - test-matrix
 
 jobs:
   build:
@@ -20,6 +20,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Install X11 on Ubuntu
+        if: matrix.os == 'ubuntu-latest'
+        run: apt-get install libgl1-mesa-dev libxi-dev libxcursor-dev libxrandr-dev libxinerama-dev
+      - name: Install XQuartz on macOS
+        if: matrix.os == 'macos-latest'
+        run: brew install xquartz --cask
       - name: Setup Go
         uses: actions/setup-go@v4
         with:
@@ -36,15 +42,15 @@ jobs:
           path: ./build/Release/**/*
           retention-days: 5
 
-  create-release:
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Releases
-        uses: actions/download-artifact@v2
-        with:
-          name: GoOfLife-${{github.ref_name}}
-          path: ./download
-      - name: Display Contents
-        run: |
-          ls -R ./download
+  # create-release:
+  #   needs: [build]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Download Releases
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: GoOfLife-${{github.ref_name}}
+  #         path: ./download
+  #     - name: Display Contents
+  #       run: |
+  #         ls -R ./download
