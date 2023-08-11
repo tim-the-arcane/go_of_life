@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - fix-win-builds
+      - cache-mingw-in-workflows
 
 jobs:
   build:
@@ -16,8 +16,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup MinGW
-        uses: egor-tensin/setup-mingw@v2
+      - name: Enable MinGW cache on Windows
+        run: |
+          echo ("CACHE_MONTH=" + $(date '+%b %Y')) >> $env:GITHUB_ENV
+      - name: Cache MinGW on Windows
+        id: cache-mingw
+        uses: actions/cache@v3
+        with:
+          path: C:\ProgramData\chocolatey\lib\mingw
+          key: ${{ env.CACHE_MONTH }}
+      - name: Setup MinGW on Windows
+        if: steps.cache-mingw.outputs.cache-hit != 'true'
+        uses: coffeebe4code/setup-mingw@v1-beta-2
         with:
           platform: x64
       - name: Setup Go

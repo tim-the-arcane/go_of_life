@@ -21,9 +21,20 @@ jobs:
       - name: Install X11 on Ubuntu
         if: matrix.os == 'ubuntu-latest'
         run: sudo apt-get install libgl1-mesa-dev libxi-dev libxcursor-dev libxrandr-dev libxinerama-dev
-      - name: Setup MinGW on Windows
+      - name: Enable MinGW cache on Windows
         if: matrix.os == 'windows-latest'
-        uses: egor-tensin/setup-mingw@v2
+        run: |
+          echo ("CACHE_MONTH=" + $(date '+%b %Y')) >> $env:GITHUB_ENV
+      - name: Cache MinGW on Windows
+        if: matrix.os == 'windows-latest'
+        id: cache-mingw
+        uses: actions/cache@v3
+        with:
+          path: C:\ProgramData\chocolatey\lib\mingw
+          key: ${{ env.CACHE_MONTH }}
+      - name: Setup MinGW on Windows
+        if: matrix.os == 'windows-latest' && steps.cache-mingw.outputs.cache-hit != 'true'
+        uses: coffeebe4code/setup-mingw@v1-beta-2
         with:
           platform: x64
       - name: Setup Go
