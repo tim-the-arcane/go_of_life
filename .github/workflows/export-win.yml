@@ -1,0 +1,33 @@
+name: Export Win 64
+
+on:
+  push:
+    branches:
+      - release/win
+      - release/win*
+
+jobs:
+  build:
+    name: Export Win64
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21.0'
+      - name: Build Release
+        run: |
+          make $MAKE_VERSION
+        env:
+          MAKE_VERSION: release_win64
+      - name: Upload Export
+        uses: actions/upload-artifact@v3
+        with:
+          name: GoOfLife-Win64.exe
+          path: ./build/*
+          retention-days: 1

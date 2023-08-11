@@ -45,7 +45,7 @@ func (g *gameImpl) Draw() {
 	for i := range g.grid {
 		for j := range g.grid[i] {
 			if g.grid[i][j] {
-				rl.DrawRectangle(int32(i)*g.cellWidth, int32(j)*g.cellWidth, g.cellWidth, g.cellWidth, rl.Green)
+				rl.DrawRectangle(int32(j)*g.cellWidth, int32(i)*g.cellWidth, g.cellWidth, g.cellWidth, rl.Green)
 			}
 		}
 	}
@@ -107,7 +107,7 @@ func (g *gameImpl) nextGeneration() {
 
 	for i := range g.grid {
 		for j := range g.grid[i] {
-			if alive := helpers.CountAliveNeighbours(&g.grid, j, i); alive < 2 || alive > 3 {
+			if alive := helpers.CountAliveNeighbors(&g.grid, j, i); alive < 2 || alive > 3 {
 				newGeneration[i][j] = false
 			} else if alive == 3 {
 				newGeneration[i][j] = true
