@@ -1,3 +1,6 @@
+run:
+		@go run -tags noaudio .
+
 release_linux_amd64:
 		@GOOS=linux GOARCH=amd64 \
 		make build_release
@@ -16,7 +19,7 @@ release_win64:
 
 build_release:
 		@echo "Building for ${GOOS} ${GOARCH} Ext: ${BUILD_OUT_FILE_EXT}/"
-		@go build -o build/GoOfLife-$(GOOS)-$(GOARCH)$(BUILD_OUT_FILE_EXT) -tags noaudio cmd/main/main.go
+		@go build -o build/GoOfLife-$(GOOS)-$(GOARCH)$(BUILD_OUT_FILE_EXT) -tags noaudio .
 
 # Alias for GitHub Actions Build Matrix
 github_actions_windows-latest:
