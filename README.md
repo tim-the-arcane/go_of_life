@@ -1,6 +1,8 @@
 # Go of Life
 
-A trippy interpretation of Conway's Game of Life
+A trippy interpretation of Conway's Game of Life.
+
+This is mostly a project to practice my skills in Go and CI/CD (if you wondered why a Game of Life implementation needed a [CI build matrix](https://github.com/tim-the-arcane/go_of_life/tree/main/.github/workflows)...) and GitHub in general. So it doesn't strive to be perfect and I don't plan to support it. So continue at your own risk, adventurer. It's dangerous alone you might need this: 🗡️
 
 ## Download
 
@@ -34,14 +36,16 @@ chmod +x GoOfLife-darwin-amd64
 
 ### Windows
 
-IDKTBH... Tell me if you find out! :D
+In most cases: Just run it and it should work.
+
+If your system doesn't support OpenGL then you have to use Mesa 3D for Window. For more details check this website.
 
 ## Building from Source
 
 ### Requirements
 
-1. installed and onfigured golang toolchain
-2. the requirements of [raylib-go](https://github.com/gen2brain/raylib-go) (on which this projects depends) for your environment
+1. Installed and onfigured golang toolchain
+2. The requirements of [raylib-go](https://github.com/gen2brain/raylib-go) (on which this projects depends) for your environment
 
 ### Start build
 
