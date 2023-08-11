@@ -1,10 +1,7 @@
 name: Export Win 64
 
 on:
-  push:
-    branches:
-      - release/win
-      - release/win*
+  workflow_dispatch
 
 jobs:
   build:
