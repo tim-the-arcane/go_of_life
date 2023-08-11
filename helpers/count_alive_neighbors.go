@@ -2,7 +2,7 @@ package helpers
 
 import "fmt"
 
-func CountAliveNeighbours(grid *[][]bool, rowIndex int, columnIndex int) (alive int) {
+func CountAliveNeighbors(grid *[][]bool, rowIndex int, columnIndex int) (alive int) {
 	columns, rows := len(*grid), len((*grid)[columnIndex])
 	if columnIndex < 0 || rowIndex < 0 || columnIndex > columns-1 || rowIndex > rows-1 {
 		panic(fmt.Sprintf("Index out of bounds!"))
