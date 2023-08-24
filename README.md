@@ -2,7 +2,9 @@
 
 A trippy interpretation of Conway's Game of Life.
 
-This is mostly a project to practice my skills in Go and CI/CD (if you wondered why a Game of Life implementation needed a [CI build matrix](https://github.com/tim-the-arcane/go_of_life/tree/main/.github/workflows)...) and GitHub in general. So it doesn't strive to be perfect and I don't plan to support it. So continue at your own risk, adventurer. It's dangerous alone you might need this: 🗡️
+This is mostly a project to practice my skills in Go and CI/CD (if you wondered why a Game of Life implementation needed a [CI build matrix](https://github.com/tim-the-arcane/go_of_life/tree/main/.github/workflows)...) and GitHub in general. So it doesn't strive to be perfect and I don't plan to support it. 
+
+So continue at your own risk, adventurer. It's dangerous to go alone! Take this: 🗡️
 
 ## Download
 
