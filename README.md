@@ -40,7 +40,7 @@ chmod +x GoOfLife-darwin-amd64
 
 In most cases: Just run it and it should work.
 
-If your system doesn't support OpenGL then you have to use Mesa 3D for Window. For more details check this website.
+If your system doesn't support OpenGL then you have to use Mesa 3D for Window. For more details check [this website](https://fdossena.com/?p=mesa/index.frag).
 
 ## Building from Source
 
